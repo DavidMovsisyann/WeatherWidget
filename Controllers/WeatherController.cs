@@ -7,10 +7,15 @@ namespace WeatherWidget.Controllers
     [Route("controller")]
     public class WeatherController : Controller
     {
-        [HttpGet("Url")]
-        public string GetWeather(string Url)
+        private readonly ApiUsingService _service;
+        public WeatherController(ApiUsingService service)
         {
-            return ApiUsingService.GetApiContent(Url);
+            _service = service;
+        }
+        [HttpGet]
+        public string GetWeather()
+        {
+            return _service.GetApiContent();
         }
     }
 }

@@ -1,15 +1,20 @@
 ﻿namespace WeatherWidget.Services
 {
-    public static class ApiUsingService
+    public class ApiUsingService
     {
-       static HttpClient client = new HttpClient();
+        IHttpClientFactory _httpClientFactory;
+        private string Url = @"https://api.openweathermap.org/data/2.5/weather?lat=<lattitude>&lon=<longitude>&appid=6cd73d4dbb7ae06b0adde9ce51f9e0f0";
         
-        public static string GetApiContent(string Url)
+        public ApiUsingService(IHttpClientFactory httpClientFactory)
         {
-            client.DefaultRequestHeaders.Accept.Clear();
+            _httpClientFactory = httpClientFactory;
+        }
 
-            string result = client.GetAsync(Url).Result.ToString();
-            return result;
+        public string GetApiContent()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response = client.GetAsync(Url);
+            return response.Result.ToString();
         }
     }
 }

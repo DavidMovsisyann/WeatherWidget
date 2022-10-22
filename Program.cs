@@ -9,7 +9,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHttpClient();
+builder.Services.AddHttpClient("WethForc", httpClient =>
+{
+    httpClient.BaseAddress = new Uri("https://api.openweathermap.org");
+});
 builder.Services.AddScoped<ApiUsingService>();
 builder.Services.AddTransient<ApiUsingService>();
 var app = builder.Build();

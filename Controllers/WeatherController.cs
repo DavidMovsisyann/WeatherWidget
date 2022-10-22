@@ -13,9 +13,9 @@ namespace WeatherWidget.Controllers
             _service = service;
         }
         [HttpGet]
-        public string GetWeather()
+        public async Task<string> GetWeather(int longtitude,int latidute)
         {
-            return _service.GetApiContent();
+            return await _service.GetApiContent(longtitude,latidute);
         }
     }
 }
